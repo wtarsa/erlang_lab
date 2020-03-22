@@ -1,5 +1,5 @@
 %%%-------------------------------------------------------------------
-%%% @author wiktor
+%%% @author Wiktor Tarsa
 %%% @copyright (C) 2020, <COMPANY>
 %%% @doc
 %%%
@@ -7,7 +7,7 @@
 %%% Created : 17. Mar 2020 16:06
 %%%-------------------------------------------------------------------
 -module(onp).
--author("wiktor").
+-author("Wiktor Tarsa").
 
 %% API
 -export([onp/1]).
@@ -34,6 +34,8 @@ evaluate_expression([H|T], [H2|T2])->
     H == "sin" -> evaluate_expression(T, lists:append([math:sin(H2)], T2));
     H == "cos" -> evaluate_expression(T, lists:append([math:cos(H2)], T2));
     H == "sqrt" -> evaluate_expression(T, lists:append([math:sqrt(H2)], T2));
+    H == "cube" -> evaluate_expression(T, lists:append([math:pow(H2, 3)], T2));
+    H == "mean" -> evaluate_expression(T, lists:append([(lists:nth(1, T2)+H2)/2], lists:delete(lists:nth(1, T2), T2)));
     true ->
       Number = list_to_number(H),
       if
@@ -47,8 +49,3 @@ evaluate_expression([H|T], [])->
     is_number(Number) ->  evaluate_expression(T, [Number]);
     true -> io:format("You have to enter a number first!")
   end.
-
-
-
-
-
