@@ -1,0 +1,64 @@
+% wypelnienie monitora danymi
+A = pollution:createMonitor().
+A1 = pollution:addStation("A", {1, 2}, A).
+A2 = pollution:addValue("A", calendar:local_time(), "PM10", 10, A1).
+A3 = pollution:addValue("A", calendar:local_time(), "PM10", 20, A2).
+A4 = pollution:addStation("B", {2, 3}, A3).
+A5 = pollution:addValue("B", calendar:local_time(), "PM2.5", 30, A4).
+A6 = pollution:addValue("A", calendar:local_time(), "temp", 46, A5).
+A7 = pollution:addValue("A", calendar:local_time(), "PM10", 50, A6).
+
+ A7.
+wynik:
+[#{"A" => {1,2},"B" => {2,3}},
+ {dict,2,16,16,8,80,48,
+       {[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]},
+       {{[],
+         [["B",{{2,3},{{2020,3,31},{23,39,52}},"PM2.5",30}]],
+         [],[],[],[],[],[],[],[],[],[],
+         [["A",{{...},...},{...}|...]],
+         [],[],[]}}}]
+10>
+komentarz: Do monitora zostały dodane dwie stacje o podanych współrzędnych. Monitor zawiera również słownik z wartościami odczytów stacji.
+Otrzymany wynik jest zgodny z oczekiwanym i utwierdza mnie w przekonaniu, że działanie funkcji createMonitor(), addStation i addValue jest poprawne.
+
+ pollution:removeValue("B", {{2020, 3, 31},{23, 39, 52}}, "PM2.5", A7).
+:wynik
+[#{"A" => {1,2},"B" => {2,3}},
+ {dict,2,16,16,8,80,48,
+       {[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]},
+       {{[],
+         [["B"]],
+         [],[],[],[],[],[],[],[],[],[],
+         [["A",{{...},...},{...}|...]],
+         [],[],[]}}}]
+Komentarz: W słowniku znikła wartość dla stacji "B", która była widoczna w poprzednim przykładzie. Funkcja removeValue działa poprawnie.
+
+pollution:getOneValue("B", {{2020, 3, 31},{23, 39, 52}}, "PM2.5", A7).
+wynik:
+30
+Komentarz: Wynik jest zgodny z oczekiwaniami.
+
+
+pollution:getStationMean("A", "PM10", A7).
+wynik:
+26.666666666666668
+Komentarz: Wynik jest zgodny z oczekiwaniami.
+
+pollution:getDailyMean({2020, 3, 31}, "PM10", A7).
+wynik:
+26.666666666666668
+Komentarz: Wynik jest zgodny z oczekiwaniami.
+
+pollution:getHourlyMean(calendar:local_time(), "PM10", A7).
+wynik:
+26.666666666666668
+Komentarz: Wynik jest zgodny z oczekiwaniami.
+
+pollution:getStationCountAboveValue("A", "PM10", 20, A7).
+wynik
+2
+Komentarz: Wynik jest zgodny z oczekiwaniami.
+
+
+Wyniki funkcji getStationMean, getDailyMean i getHourlyMean są i powinny być takie same, pownieważ wszystkie odczyty zostały dodane w jednej godzinie.
