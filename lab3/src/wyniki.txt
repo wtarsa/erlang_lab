@@ -1,0 +1,38 @@
+Poniżej zamieszczam wyniki testów obliczeń równoległych wykonanych w konsoli.
+We wszystkich przypadkach wyniki były bardzo zbliżone. Jednak za każdym razem najszybsze było wykonanie przy użyciu dwóch procesów, następnie zwykłe wykonanie sekwencyjne, a najwolniejsze - tworzenie osobnego procesu dla każdej osoby.  
+
+Podany czas wykonania to czas w mikrosekundach.
+
+Erlang/OTP 22 [erts-10.7] [source] [64-bit] [smp:4:4] [ds:4:4:10] [async-threads:1]
+
+Eshell V10.7  (abort with ^G)
+1> compile:file(parcel).
+{ok,parcel}
+2> parcel:init().
+Czas wykonania sekwencyjnie: 37675789
+Czas wykonania bardzo rownolegle: 37838028
+Czas wykonania rownolegle: 36867059
+ok
+3> parcel:init().
+Czas wykonania sekwencyjnie: 37457497
+Czas wykonania bardzo rownolegle: 37918986
+Czas wykonania rownolegle: 36771485
+ok
+4> parcel:init().
+Czas wykonania sekwencyjnie: 37609144
+Czas wykonania bardzo rownolegle: 37838402
+Czas wykonania rownolegle: 36965253
+ok
+5> parcel:init().
+Czas wykonania sekwencyjnie: 37665084
+Czas wykonania bardzo rownolegle: 37952100
+Czas wykonania rownolegle: 37029139
+ok
+6> parcel:init().
+Czas wykonania sekwencyjnie: 37687548
+Czas wykonania bardzo rownolegle: 37998682
+Czas wykonania rownolegle: 37596714
+ok
+
+
+
