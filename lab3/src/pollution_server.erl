@@ -1,6 +1,15 @@
+%%%-------------------------------------------------------------------
+%%% @author wiktor
+%%% @copyright (C) 2020, <COMPANY>
+%%% @doc
+%%%
+%%% @end
+%%% Created : 14. Apr 2020 9:35
+%%%-------------------------------------------------------------------
 -module(pollution_server).
 -author("wiktor").
 
+%% API
 -export([start/0, init/0, stop/0, addStation/2, addValue/4, removeValue/3, getOneValue/3, getStationMean/2, getDailyMean/2, getHourlyMean/2, getStationCountAboveValue/3]).
 
 start() ->
