@@ -9,3 +9,5 @@
 /lab3/lab3.iml
 /lab3/.idea
 /lab3/out
+*.zip
+/eunit-tests-examples

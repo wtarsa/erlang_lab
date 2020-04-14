@@ -1,19 +1,7 @@
 -module(pollution_server).
 -author("wiktor").
 
--export([
-	start/0,
-	init/0,
-	stop/0,
-	addStation/2,
-	addValue/4,
-	removeValue/3,
-	getOneValue/3,
-	getStationMean/2,
-	getDailyMean/2,
-	getHourlyMean/2,
-	getStationCountAboveValue/3
-]).
+-export([start/0, init/0, stop/0, addStation/2, addValue/4, removeValue/3, getOneValue/3, getStationMean/2, getDailyMean/2, getHourlyMean/2, getStationCountAboveValue/3]).
 
 start() ->
 	register(monitor, spawn_link(?MODULE, init, [])).
