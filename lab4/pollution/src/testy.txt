@@ -1,0 +1,21 @@
+pollution_gen_server:addStation("A", {1, 2}).
+pollution_gen_server:addStation("B", {1, 2}).
+pollution_gen_server:addStation("B", {3, 4}).
+pollution_gen_server:addValue("A",{{2020, 5, 2},{14,15,16}}, "PM10", 6).
+pollution_gen_server:addValue("A",{{2020, 5, 2},{14,19,16}}, "PM10", 2).
+pollution_gen_server:addValue("A",{{2020, 5, 2},{15,20,16}}, "PM10", 8).
+pollution_gen_server:addValue("B",{{2020, 5, 1},{16,15,16}}, "PM10", 6).
+pollution_gen_server:addValue("B",{{2020, 5, 2},{14,19,16}}, "PM10", 2).
+pollution_gen_server:addValue("A",{{2020, 5, 2},{13,46,23}}, "PM2.5", 7).
+pollution_gen_server:getOneValue("A",{{2020, 5, 2},{15,20,16}}, "PM10").
+pollution_gen_server:removeValue("A",{{2020, 5, 2},{15,20,16}}, "PM10").
+pollution_gen_server:getOneValue("A",{{2020, 5, 2},{15,20,16}}, "PM10").
+pollution_gen_server:getOneValue("A",{{2020, 5, 2},{14,19,16}}, "PM10").
+pollution_gen_server:getStationMean("A", "PM10").
+pollution_gen_server:getDailyMean({2020, 5, 2}, "PM10").
+pollution_gen_server:getHourlyMean({{2020, 5, 2},{14, 1, 0}}, "PM10").
+pollution_gen_server:getStationCountAboveValue("A", "PM10", 3).
+pollution_gen_server:getStationCountAboveValue("B", "PM10", 3).
+
+dict:fetch("A", lists:nth(2, pollution_gen_server:getMonitor())).
+pollution_gen_server:getMonitor().

@@ -26,10 +26,22 @@ start_link() ->
 %%                  type => worker(),       % optional
 %%                  modules => modules()}   % optional
 init([]) ->
-    SupFlags = #{strategy => one_for_all,
-                 intensity => 0,
-                 period => 1},
-    ChildSpecs = [],
+    SupFlags = #{strategy => one_for_one,
+                 intensity => 2,
+                 period => 3},
+    ChildSpecs = [
+      #{id => 'pow',
+        start => {pow, start_link, []},
+        restart => permanent,
+        shutdown => 2000,
+        type => worker,
+        modules => [pow]},
+      #{id => 'pollution_gen_server',
+        start => {pollution_gen_server, start_link, []},
+        restart => permanent,
+        shutdown => 2000,
+        type => worker,
+        modules => [pollution_gen_server]}],
     {ok, {SupFlags, ChildSpecs}}.
 
 %% internal functions
