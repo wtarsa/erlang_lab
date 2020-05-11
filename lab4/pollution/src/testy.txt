@@ -1,4 +1,5 @@
 pollution_gen_server:addStation("A", {1, 2}).
+pollution_gen_server:addStation("A", {6, 4}).
 pollution_gen_server:addStation("B", {1, 2}).
 pollution_gen_server:addStation("B", {3, 4}).
 pollution_gen_server:addValue("A",{{2020, 5, 2},{14,15,16}}, "PM10", 6).
@@ -16,6 +17,3 @@ pollution_gen_server:getDailyMean({2020, 5, 2}, "PM10").
 pollution_gen_server:getHourlyMean({{2020, 5, 2},{14, 1, 0}}, "PM10").
 pollution_gen_server:getStationCountAboveValue("A", "PM10", 3).
 pollution_gen_server:getStationCountAboveValue("B", "PM10", 3).
-
-dict:fetch("A", lists:nth(2, pollution_gen_server:getMonitor())).
-pollution_gen_server:getMonitor().
