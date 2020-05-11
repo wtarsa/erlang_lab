@@ -3,8 +3,8 @@ defmodule PollutionData do
 
 
   def importLinesFromCSV do
-    #lines = File.read!("pollution.csv") |> String.split("\r\n")
-    lines = File.stream!("pollution.csv") |> String.split("\r\n")
+    lines = File.stream!("pollution.csv")
+    Enum.to_list(Stream.map(Enum.to_list(lines), fn x -> Enum.at(String.split(x, "\n"), 0) end))
   end
 
   def convertOneLine(line) do
